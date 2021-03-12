@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>HTML Form</title>
+      <link href="style.css" rel="stylesheet" type="text/css">
+   </head>
+   <body>
+      <div id="container">
+         <h2>HTML Forms</h2>
+         <form action="url">
+            <div class="item">
+               <label for="fname">First name</label><br>
+               <input type="text" id="fname" name="fname" placeholder="Your first name" required autofocus>
+            </div>
+            <div class="item">
+               <label for="mname">Middle name (optional)</label><br>
+               <input type="text" id="mname" placeholder="Your middle name" name="mname">
+            </div>
+            <div class="item">
+               <label for="lname">Last name</label><br>
+               <input type="text" id="lname" name="lname" placeholder="Your last name" required>
+            </div>
+
+            <div class="item">
+               <label for="suffix">Suffix (optional)</label><br>
+               <select id="suffix" class="selection">
+                  <option value="sir" selected>Sir</option>
+                  <option value="Madam">Madam</option>
+                  <option value="Mrs">Mrs</option>
+                  <option value="Ms" >Ms</option>
+               </select>
+            </div>
+
+            <div class="item">
+               <label for="lname">Residential address line 1</label><br>
+               <input type="text" id="resident_adress" name="address" placeholder="your address" required> 
+            </div>
+
+            <div class="adress_container item">
+               <div class="col">
+                  <label for="city">City</label><br>
+                  <input type="text" id="city" name="city" placeholder="Fairfield" required>
+               </div>
+               <div class="col">
+                  <label for="state">State</label><br>
+                  <select id="state" class="selection">
+                     <option value="Iowa" selected>Iowa</option>
+                     <option value="Alabama">Alabama</option>
+                     <option value="California">California</option>
+                     <option value="audi">Florida</option>
+                  </select>
+
+               </div>
+               <div class="col">
+                  <label for="zipcode">ZIP code</label><br>
+                  <input type="text" id="zipcode" name="zipcode" placeholder="12345" pattern="^\d{5}" required>   
+               </div>
+            </div>
+
+            <div class="item">
+               <label for="primary_phone">Primary phone number</label><br>
+               <input type="text" id="primary_phone" name="primary_phone" pattern="^\(\d{3}\)+[ ]\d{3}-\d{4}$" required placeholder="(123) 456-7899">    
+            </div>
+           
+            <div class="item" id="phone_container" >
+               <input type="radio" name="phone" value="mobile_phone" required> Mobile Phone
+               <input type="radio" name="phone" value="home_phone" required> Home Phone
+            </div>
+            <div class="item">
+               <label for="email_address">Email adress</label><br>
+               <input type="email" id="email_address" name="email_address" placeholder="stefan@gmail.com" required>
+            </div>
+         
+            <div class="item">
+                <label for="ssn">SSN</label><br>
+                <input type="text" id="ssn" name="ssn" placeholder="123-45-6789" pattern="^\d{3}-\d{2}-\d{4}$">
+            </div>
+
+            <div class="item">
+               <label>Credit Card</label><br>
+               <input type="text" id="credit_card" name="ssn" pattern="^\d{13,19}" placeholder="length 13 to 19" required>
+            </div>
+
+            <div class="item submit_container">
+               <input type="submit" value="Submit">
+            </div>
+         </form>
+
+         <div id="validate">
+            <a href="http://validator.w3.org/check?uri=https://truongthanhtungitvn.github.io/lesson4/form.html" target="_blank"><img src="./w3c-html.png" alt="Valid HTML5"></a> 
+         </div>
+      </div>
+   </body>
+</html>

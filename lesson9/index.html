@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+        <title>Ajax</title>
+        <style>
+            .container{
+                width: 500px;
+                margin: 0 auto;
+            }
+            .form-item {
+                width: 500px;
+                margin-bottom: 10px;
+            }
+
+            label {
+                width: 120px;
+                float:left;
+            }
+            input {
+                height: 20px;
+            }
+
+            button {
+                padding: 5px;
+                margin: 10px auto;
+                background-color: aquamarine;
+                font-size: 20px;
+                width: 300px;
+
+            }
+
+            button.view_comment{
+                width: auto;
+                background-color: bisque;
+            }
+
+            textarea {
+                width: 300px;
+                min-height: 200px;
+            }
+
+
+            .user_info p {
+                padding: 5px;
+            }
+
+            .post_item{
+                background-color:#c6e2cb;
+                padding: 10px;
+                margin-top: 10px;
+                border: 1px solid black;
+                border-radius: 5px;
+            }
+
+            .comment_item{
+                background-color:#aeccea;
+                padding: 10px;
+                margin-top: 10px;
+                border: 1px solid black;
+                border-radius: 5px;
+            }
+
+            #user_info, #user_post{
+                background-color:#bbe780;
+                padding: 10px;
+                margin-top: 10px;
+                border: 1px solid black;
+                border-radius: 5px;
+            }
+
+            .strong{
+                font-weight: bold;
+            }
+
+            .body{
+                font-size: 0.9em;
+                font-style: italic;
+            }
+        </style>
+	</head>
+
+	<body>
+        <div class="container">
+             <h1>Exercise: Parsing JSON and Ajax</h1>
+            <div class="form-item">
+                <label for="name">User ID:</label>
+                <input type="text" name="uid" id="uid" autofocus pattern="\d"/>
+            </div>
+
+            <div class="form-item">
+                <button id="btn">Get user's Info</button>
+            </div>
+
+            <div id="user_info">
+                <h3>User Info</h3>
+
+            </div>
+            <div id="user_post">
+                <h3>
+                    Posts of user
+                </h3>
+            </div>
+        </div>
+
+        <script>
+         window.onload = (function(){
+            let enpoint = "https://jsonplaceholder.typicode.com";
+
+            let btn = document.getElementById("btn");
+            let uid = document.getElementById("uid");
+            btn.onclick = clickhandler;
+
+            function clickhandler(e) {
+                // console.log(parseInt(uid.value) );
+                if(uid.value == "" || isNaN(uid.value)) return false;
+
+                if(uid.value > 10) {
+                    alert("user id must from 1 - 10"); return false;
+                }
+                
+                fetch(enpoint + "/users/" + uid.value)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        document.getElementById("user_info").innerHTML +=`<p> Name: ${data.name}</p>`;
+                        document.getElementById("user_info").innerHTML +=`<p> Username: ${data.username}</p>`;
+                        document.getElementById("user_info").innerHTML +=`<p> Email: ${data.email}</p>`;
+                        document.getElementById("user_info").innerHTML +=`<p> Phone: ${data.phone}</p>`;
+                        document.getElementById("user_info").innerHTML +=`<p> Website: ${data.website}</p>`;
+                        document.getElementById("user_info").innerHTML +=`<p> Company: ${data.company.name}</p>`;
+                        document.getElementById("user_info").innerHTML +=`<p> Address: ${data.address.street} ${data.address.suite}, ${data.address.city}, ${data.address.zipcode}</p>`;
+                    })
+                    .catch(err => {
+                        console.log('Fetch Error :-S', err);
+                    });
+
+                getPost(uid.value);
+            }
+
+            function getPost(uid){
+                fetch(enpoint + `/users/${uid}/posts`)
+                .then(response => response.json())
+                .then( datas => {
+                    _renderPost(datas);
+                })
+                .catch(err => {
+                    console.log('Fetch Error :-S', err);
+                });
+            }
+
+
+            function getComments(){
+
+            }
+
+            function _renderPost(datas){
+                let userPost = document.getElementById("user_post");
+                for(let data of datas) {
+                    userPost.innerHTML += `<div class="post_item" >
+                        <p> <span class="strong">Title</span>: ${data.title}</p>
+                        <p> <span class="strong">Body</span>: <span class="body">${data.body}</span></p>
+                        <button class="view_comment" data-pid="${data.id}" id="view_comment_${data.id}"> View comments</button>
+                        <div id="post_comment_${data.id}" ></div>
+                        </div>`;
+                }
+                     
+                let listEles = document.getElementsByClassName("view_comment");
+                for(let ele of listEles) {
+                    ele.onclick = function(){
+                        let pid = this.dataset.pid;
+                        fetch(enpoint + `/posts/${pid}/comments`)
+                            .then(response => response.json())
+                            .then( comments => {
+                                console.log(comments);
+                                _renderComments(pid,comments);
+                            })
+                            .catch(err => {
+                                console.log('Fetch Error :-S', err);
+                            });
+                    }
+                }
+            }
+
+            function _renderComments(pid, comments){
+                let postCommentContainer = document.getElementById(`post_comment_${pid}`);
+                for(let c of comments) {
+                    postCommentContainer.innerHTML += `<div class="comment_item">
+                                    <p> <span class="strong">Name</span>: ${c.name}</p>
+                                    <p> <span class="strong">Email</span>: ${c.email}</p>
+                                    <p> <span class="strong">Body</span>: <span class="body">${c.body}</span></p>
+                                    </div>`;
+                }
+            }
+         }());
+        </script>
+	</body>
+</html>

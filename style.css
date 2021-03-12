@@ -1,0 +1,37 @@
+body {
+    padding: 30px;
+}
+h1 {
+    font-size: 40px;
+}
+h2 {
+    font-size: 30px;
+    margin: 30px auto;
+}
+
+td,
+h2 {
+    text-align: center;
+}
+
+/* style table */
+table {
+    border-collapse: collapse;
+    margin: 20px auto;
+}
+
+table, th, td {
+    border: 1px solid black;
+    padding: 20px;
+    min-width: 70px;
+}
+
+table tr:nth-child(even) {
+    background-color: #d0d0d0;
+}
+
+table th {
+    background-color: #5da231;
+}
+
+/* end style for table  */

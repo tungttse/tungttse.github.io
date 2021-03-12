@@ -1,0 +1,89 @@
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #68b6b6
+}
+
+#page {
+    width: 750px;
+    margin: auto;
+}
+
+a:link {
+    text-decoration: none;
+    color: #68b6b6
+}
+
+#header {
+    border: 4px thick #A8F0F0;
+    border-radius: 15px;
+    background-color: #A8F0F0;    
+    text-align: right; 
+    padding: 5px;       
+}
+
+#header h1 {
+    margin-right: 10px; 
+}
+
+#header h2 {
+    margin-right: 10px;
+    font-size: 14pt;
+}
+
+#friend-list {
+    float: left;
+    width: 100px;
+    overflow: auto;
+    margin-top: 16px;
+}
+
+nav {        
+    border: 5px solid #035555;
+    border-radius: 15px;
+    background-color: #67e7e7;
+}
+
+nav li {
+    font-size: 10px;
+}
+
+ul {
+    margin-left: -25px;
+}
+
+h1 {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+h2 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+.section {           
+    margin-top: 1em;
+    margin-bottom: 1em;    
+    overflow: auto;
+    margin-left: 110px;
+    border: 5px solid #83dfdf;
+    border-radius: 15px;
+    background-color: #c1f1f1;
+    padding: 11px;
+}
+
+.date-style {
+    border-bottom: 2px dashed blue;
+}
+
+.imgs {
+    float: right;
+    margin-top: 0px;
+    margin-left: 5px;
+}
+
+.ptext {
+    text-align: justify;
+}
+
+.validation-div {
+    display: inline;
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+	<title>Alarm</title>
+	<link href="./alarm.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+	<h1>
+		<img id="logo" src="./timer.gif" width="150px" height="150px" alt="UW CSE logo">
+		Timer Alarm
+	</h1>
+
+	<div>
+		<input id="min" type="text"> min
+	</div>
+
+	<div>
+		<input id="sec" type="text"> sec
+	</div>
+
+	<div>
+		<button id="go">Go</button>
+	</div>
+
+	<script>
+		let txtMin = document.getElementById("min");
+		let txtSec = document.getElementById("sec");
+		let btnGo = document.getElementById("go");
+
+		let timerId;
+		let min;
+		let sec;
+		let enterMin = true;
+
+		btnGo.onclick = () => {
+			btnGo.disabled = true;
+
+			min = parseInt(txtMin.value);
+			if (isNaN(min)) {
+				enterMin = false;
+				min = 0;
+			}
+
+			sec = parseInt(txtSec.value);
+			if (isNaN(sec)) sec = 0;
+			
+			if (validInput(min, sec)) {
+				timerId = setInterval(countDown, 1000);
+			}
+		};
+
+		function validInput(m, s){
+			if (min < 0 || sec < 0) {
+				alert("Input is invalid");
+				return false;				
+			}
+			else if (min == 0 && sec == 0) {
+				alert("Input value first !!!");
+				return false;
+			}
+
+			return true;
+		}
+
+		function countDownComplete(timerId){
+			clearInterval(timerId);
+			document.body.style.backgroundColor = "red";
+		}
+
+		function countDown(){			
+			if (min == 0 && sec == 0) {
+				countDownComplete(timerId);
+			}
+			if (sec == 0) {
+				if (min > 0) {
+					min--;
+					sec = 59;
+				}
+			}
+			else {
+				sec--;
+			}
+
+			if (enterMin) txtMin.value = min;
+			txtSec.value = sec;
+		}
+		
+	</script>
+</body>
+
+</html>
